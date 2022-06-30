@@ -1,3 +1,12 @@
+## makeVector function creates a special vector, a list which contains function to:
+## 1. set value of vector
+## 2. get value of vector
+## 3. set value of mean
+## 4. get value of mean
+
+## I set input x as matrix
+## I set solved value "m" as null
+
 makeVector <- function(x = numeric()) {
   m <- NULL
   set <- function(y) {
@@ -22,6 +31,9 @@ cachemean <- function(x, ...) {
   x$setmean(m)
   m
 }
+
+## makeCacheMatrix function creates a special matrix object that can cache its inverse
+
 makeCacheMatrix <- function(x = matrix()) {
   j <- NULL
   set <- function(y){
@@ -35,6 +47,13 @@ makeCacheMatrix <- function(x = matrix()) {
        setInverse = setInverse, 
        getInverse = getInverse)
 }
+
+## cacheSolve function computes the inverse of special matrix returned by makeCacheMatrix
+## cacheSolve will retrieve the inverse from cache if the inverse has been calculated
+## solve function is used to compute the inverse of square matrix
+## this can be proven when X is a square invertible matrix
+## hence, solve(x) will return its inverse
+
 cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
   j <- x$getInverse()
@@ -47,3 +66,4 @@ cacheSolve <- function(x, ...) {
   x$setInverse(j)
   j
 }
+
